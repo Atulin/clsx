@@ -1,68 +1,63 @@
-/**
- * Ported from `classnames` for compatibility checks.
- */
-
-import { test } from 'uvu';
-import * as assert from 'uvu/assert';
+import { expect, test } from 'bun:test';
 import clsx from '../src';
 
 test('(compat) keeps object keys with truthy values', () => {
 	const out = clsx({ a:true, b:false, c:0, d:null, e:undefined, f:1 });
-	assert.is(out, 'a f');
+	expect(out).toBe('a f');
 });
 
 test('(compat) joins arrays of class names and ignore falsy values', () => {
 	const out = clsx('a', 0, null, undefined, true, 1, 'b');
-	assert.is(out, 'a 1 b');
+	expect(out).toBe('a 1 b');
 });
 
 test('(compat) supports heterogenous arguments', () => {
-	assert.is(clsx({ a:true }, 'b', 0), 'a b');
+	expect(clsx({ a:true }, 'b', 0)).toBe('a b');
 });
 
 test('(compat) should be trimmed', () => {
-	assert.is(clsx('', 'b', {}, ''), 'b');
+	expect(clsx('', 'b', {}, '')).toBe('b');
 });
 
 test('(compat) returns an empty string for an empty configuration', () => {
-	assert.is(clsx({}), '');
+	expect(clsx({})).toBe('');
 });
 
 test('(compat) supports an array of class names', () => {
-	assert.is(clsx(['a', 'b']), 'a b');
+	expect(clsx(['a', 'b'])).toBe('a b');
 });
 
 test('(compat) joins array arguments with string arguments', () => {
-	assert.is(clsx(['a', 'b'], 'c'), 'a b c');
-	assert.is(clsx('c', ['a', 'b']), 'c a b');
+	expect(clsx(['a', 'b'], 'c')).toBe('a b c');
+	expect(clsx('c', ['a', 'b'])).toBe('c a b');
 });
 
 test('(compat) handles multiple array arguments', () => {
-	assert.is(clsx(['a', 'b'], ['c', 'd']), 'a b c d');
+	expect(clsx(['a', 'b'], ['c', 'd'])).toBe('a b c d');
 });
 
 test('(compat) handles arrays that include falsy and true values', () => {
-	assert.is(clsx(['a', 0, null, undefined, false, true, 'b']), 'a b');
+	expect(clsx(['a', 0, null, undefined, false, true, 'b'])).toBe('a b');
 });
 
 test('(compat) handles arrays that include arrays', () => {
-	assert.is(clsx(['a', ['b', 'c']]), 'a b c');
+	expect(clsx(['a', ['b', 'c']])).toBe('a b c');
 });
 
 test('(compat) handles arrays that include objects', () => {
-	assert.is(clsx(['a', { b:true, c:false }]), 'a b');
+	expect(clsx(['a', { b:true, c:false }])).toBe('a b');
 });
 
 test('(compat) handles deep array recursion', () => {
-	assert.is(clsx(['a', ['b', ['c', { d:true }]]]), 'a b c d');
+	expect(clsx(['a', ['b', ['c', { d:true }]]])).toBe('a b c d');
 });
 
 test('(compat) handles arrays that are empty', () => {
-	assert.is(clsx('a', []), 'a');
+	expect(clsx('a', [])).toBe('a');
 });
 
 test('(compat) handles nested arrays that have empty nested arrays', () => {
-	assert.is(clsx('a', [[]]), 'a');
+	expect(clsx('a', [[]])).toBe('a');
 });
 
 test('(compat) handles all types of truthy and falsy property values as expected', () => {
@@ -87,7 +82,5 @@ test('(compat) handles all types of truthy and falsy property values as expected
 		greaterZero: 1
 	});
 
-	assert.is(out, 'nonEmptyString whitespace function emptyObject nonEmptyObject emptyList nonEmptyList greaterZero');
+	expect(out).toBe('nonEmptyString whitespace function emptyObject nonEmptyObject emptyList nonEmptyList greaterZero');
 });
-
-test.run();

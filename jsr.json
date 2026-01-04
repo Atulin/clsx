@@ -1,0 +1,8 @@
+{
+	"name": "@atulin/clsx",
+	"version": "2.2.0",
+	"exports": {
+		".": "./src/index.ts",
+		"./lite": "./src/lite.ts"
+	}
+}
