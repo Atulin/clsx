@@ -1,20 +1,19 @@
-# clsx [![CI](https://github.com/lukeed/clsx/workflows/CI/badge.svg)](https://github.com/lukeed/clsx/actions?query=workflow%3ACI) [![codecov](https://badgen.net/codecov/c/github/lukeed/clsx)](https://codecov.io/gh/lukeed/clsx) [![licenses](https://licenses.dev/b/npm/clsx)](https://licenses.dev/npm/clsx)
+# clsx [![CI](https://github.com/atulin/clsx/workflows/CI/badge.svg)](https://github.com/atulin/clsx/actions?query=workflow%3ACI) [![codecov](https://codecov.io/github/Atulin/clsx/graph/badge.svg?token=JUV3VJC97O)](https://codecov.io/github/Atulin/clsx) [![licenses](https://licenses.dev/b/npm/clsx)](https://licenses.dev/npm/clsx)
 
-> A tiny (239B) utility for constructing `className` strings conditionally.<Br>Also serves as a [faster](bench) & smaller drop-in replacement for the `classnames` module.
+> A tiny utility for constructing `className` strings conditionally.<Br>Also serves as a [faster](bench) & smaller drop-in replacement for the `classnames` module.
 
-This module is available in three formats:
-
-* **ES Module**: `dist/clsx.mjs`
-* **CommonJS**: `dist/clsx.js`
-* **UMD**: `dist/clsx.min.js`
+This module is available in only in ESM format
 
 
 ## Install
 
 ```
-$ npm install --save clsx
+deno add jsr:@atulin/clsx
+pnpm add jsr:@atulin/clsx
+yarn add jsr:@atulin/clsx
+npx jsr add @atulin/clsx
+bunx jsr add @atulin/clsx
 ```
-
 
 ## Usage
 

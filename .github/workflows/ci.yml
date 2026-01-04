@@ -1,48 +1,33 @@
 name: CI
 
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 jobs:
   test:
     name: Node.js v${{ matrix.nodejs }}
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        nodejs: [8, 10, 12, 14, 16, 18]
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.nodejs }}
+      - uses: actions/checkout@v5
+      - uses: oven-sh/setup-bun@v2
 
-    - name: (cache) restore
-      uses: actions/cache@master
-      with:
-        path: node_modules
-        key: ${{ runner.os }}-${{ hashFiles('**/package.json') }}
+      - name: (cache) restore
+        uses: actions/cache@master
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-${{ hashFiles('**/package.json') }}
 
-    - name: Install
-      run: npm install
+      - name: Install
+        run: bun i
 
-    - name: (coverage) Install
-      if: matrix.nodejs >= 18
-      run: npm install -g c8
+      - name: Build
+        run: bun run build
 
-    - name: Build
-      run: npm run build
+      - name: Test
+        run: bun test --coverage --coverage-reporter=lcov
 
-    - name: Test
-      run: npm test
-      if: matrix.nodejs < 18
-
-    - name: (coverage) Test
-      run: c8 --include=src npm test
-      if: matrix.nodejs >= 18
-
-    - name: (coverage) Report
-      if: matrix.nodejs >= 18
-      run: |
-        c8 report --reporter=text-lcov > coverage.lcov
-        bash <(curl -s https://codecov.io/bash)
-      env:
-        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      - name: Upload coverage
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: true
