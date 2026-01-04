@@ -1,4 +1,4 @@
-# clsx [![CI](https://github.com/atulin/clsx/workflows/CI/badge.svg)](https://github.com/atulin/clsx/actions?query=workflow%3ACI) [![codecov](https://codecov.io/github/Atulin/clsx/graph/badge.svg?token=JUV3VJC97O)](https://codecov.io/github/Atulin/clsx) [![licenses](https://licenses.dev/b/npm/clsx)](https://licenses.dev/npm/clsx)
+# clsx [![CI](https://github.com/Atulin/clsx/actions/workflows/ci.yml/badge.svg)](https://github.com/Atulin/clsx/actions/workflows/ci.yml) [![codecov](https://codecov.io/github/Atulin/clsx/graph/badge.svg?token=JUV3VJC97O)](https://codecov.io/github/Atulin/clsx) [![licenses](https://licenses.dev/b/npm/clsx)](https://licenses.dev/npm/clsx)
 
 > A tiny utility for constructing `className` strings conditionally.<Br>Also serves as a [faster](bench) & smaller drop-in replacement for the `classnames` module.
 
